@@ -1,4 +1,4 @@
-from langchain.llms import OpenAI
+from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.chains import SequentialChain
@@ -7,7 +7,14 @@ from secret_key import openapi_key
 import os
 os.environ['OPENAI_API_KEY'] = openapi_key
 
-llm = OpenAI(temperature=0.7)
+# Using DeepSeek model
+llm = ChatOpenAI(
+    model='deepseek-chat',
+    openai_api_key=openapi_key,
+    openai_api_base='https://api.deepseek.com',
+    max_tokens=1024,
+    temperature=0.7
+)
 
 def generate_restaurant_name_and_items(cuisine):
     # Chain 1: Restaurant Name
